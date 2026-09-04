@@ -1,0 +1,6 @@
+https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=199099481257-f68vht66b0ianl1happs.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A57136%2F&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.upload&state=aZWykkXHrogsu&code_challenge=2WlVY-moviepy==1.0.3
+google-api-python-client==2.149.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0
+Pillow==10.4.0
+numpy==1.26.4
