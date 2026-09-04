@@ -1,0 +1,48 @@
+name: Generar vídeo y subir a YouTube
+
+on:
+  schedule:
+    # Cada día a las 03:00 UTC (ajusta según necesites)
+    - cron: "0 3 * * *"
+  workflow_dispatch:          # permite lanzarlo manualmente
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install system dependencies (FFmpeg + fuentes)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generar vídeo
+        run: python generate_video.py
+
+      - name: Subir a YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_PRIVACY: unlisted          # cambia a "public" si lo deseas
+        run: python upload_youtube.py
+
+      - name: Guardar vídeo como artefacto (opcional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-video
+          path: output_video.mp4
+          retention-days: 7
