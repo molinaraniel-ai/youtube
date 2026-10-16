@@ -10,14 +10,14 @@ def generar_video():
     # 1. Fondo de 40 segundos (Color azul oscuro/grisáceo moderno)
     fondo = ColorClip(size=(1280, 720), color=(15, 23, 42), duration=40)
     
-    # 2. Título principal (usando fuente compatible con Linux: DejaVu-Sans)
+    # 2. Título principal usando un método compatible con ImageMagick
     titulo = (
         TextClip(
-            text="Automatización con Python\n& GitHub Actions",
+            text="Automatizacion con Python\n& GitHub Actions",
             font_size=50,
             color="white",
-            font="DejaVu-Sans",
-            text_align="center"
+            method="caption",
+            size=(1100, 200)
         )
         .with_position(("center", 200))
         .with_duration(40)
@@ -27,7 +27,7 @@ def generar_video():
     
     # 3. Textos dinámicos por intervalos
     texto_1 = (
-        TextClip(text="🚀 Creando videos automáticamente", font_size=35, color="#38bdf8", font="DejaVu-Sans")
+        TextClip(text="Creando videos automaticamente", font_size=35, color="#38bdf8", method="caption", size=(1000, 100))
         .with_position(("center", 480))
         .with_start(0)
         .with_duration(13)
@@ -36,7 +36,7 @@ def generar_video():
     )
     
     texto_2 = (
-        TextClip(text="⚙️ Procesando con MoviePy y FFmpeg", font_size=35, color="#4ade80", font="DejaVu-Sans")
+        TextClip(text="Procesando con MoviePy y FFmpeg", font_size=35, color="#4ade80", method="caption", size=(1000, 100))
         .with_position(("center", 480))
         .with_start(13)
         .with_duration(13)
@@ -45,7 +45,7 @@ def generar_video():
     )
     
     texto_3 = (
-        TextClip(text="📺 Subida automática a YouTube completada", font_size=35, color="#f472b6", font="DejaVu-Sans")
+        TextClip(text="Subida automatica a YouTube completada", font_size=35, color="#f472b6", method="caption", size=(1000, 100))
         .with_position(("center", 480))
         .with_start(26)
         .with_duration(14)
