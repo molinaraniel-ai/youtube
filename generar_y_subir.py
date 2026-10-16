@@ -10,13 +10,13 @@ def generar_video():
     # 1. Fondo de 40 segundos (Color azul oscuro/grisáceo moderno)
     fondo = ColorClip(size=(1280, 720), color=(15, 23, 42), duration=40)
     
-    # 2. Título principal que dura todo el video con efecto de aparición y desvanecimiento
+    # 2. Título principal (usando fuente compatible con Linux: DejaVu-Sans)
     titulo = (
         TextClip(
             text="Automatización con Python\n& GitHub Actions",
             font_size=50,
             color="white",
-            font="Arial",
+            font="DejaVu-Sans",
             text_align="center"
         )
         .with_position(("center", 200))
@@ -25,9 +25,9 @@ def generar_video():
         .crossfadeout(2)
     )
     
-    # 3. Textos dinámicos que van cambiando según el segundo (animación por intervalos)
+    # 3. Textos dinámicos por intervalos
     texto_1 = (
-        TextClip(text="🚀 Creando videos automáticamente", font_size=35, color="#38bdf8", font="Arial")
+        TextClip(text="🚀 Creando videos automáticamente", font_size=35, color="#38bdf8", font="DejaVu-Sans")
         .with_position(("center", 480))
         .with_start(0)
         .with_duration(13)
@@ -36,7 +36,7 @@ def generar_video():
     )
     
     texto_2 = (
-        TextClip(text="⚙️ Procesando con MoviePy y FFmpeg", font_size=35, color="#4ade80", font="Arial")
+        TextClip(text="⚙️ Procesando con MoviePy y FFmpeg", font_size=35, color="#4ade80", font="DejaVu-Sans")
         .with_position(("center", 480))
         .with_start(13)
         .with_duration(13)
@@ -45,7 +45,7 @@ def generar_video():
     )
     
     texto_3 = (
-        TextClip(text="📺 Subida automática a YouTube completada", font_size=35, color="#f472b6", font="Arial")
+        TextClip(text="📺 Subida automática a YouTube completada", font_size=35, color="#f472b6", font="DejaVu-Sans")
         .with_position(("center", 480))
         .with_start(26)
         .with_duration(14)
