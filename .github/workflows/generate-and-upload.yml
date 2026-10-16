@@ -18,10 +18,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias del sistema (FFmpeg e ImageMagick)
+      - name: Instalar dependencias del sistema (FFmpeg, ImageMagick y Fuentes)
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg imagemagick
+          sudo apt-get install -y ffmpeg imagemagick fonts-dejavu-core
 
       - name: Actualizar pip e instalar librerías de Python
         run: |
