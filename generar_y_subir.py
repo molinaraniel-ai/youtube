@@ -1,6 +1,7 @@
 import os
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 from moviepy import ColorClip, TextClip, CompositeVideoClip
 
@@ -10,7 +11,7 @@ def generar_video():
     # 1. Fondo de 40 segundos (Color azul oscuro/grisáceo moderno)
     fondo = ColorClip(size=(1280, 720), color=(15, 23, 42), duration=40)
     
-    # 2. Título principal usando un método compatible con ImageMagick
+    # 2. Título principal durante todo el video
     titulo = (
         TextClip(
             text="Automatizacion con Python\n& GitHub Actions",
@@ -21,18 +22,14 @@ def generar_video():
         )
         .with_position(("center", 200))
         .with_duration(40)
-        .crossfadein(2)
-        .crossfadeout(2)
     )
     
-    # 3. Textos dinámicos por intervalos
+    # 3. Textos dinámicos por intervalos de tiempo exactos
     texto_1 = (
         TextClip(text="Creando videos automaticamente", font_size=35, color="#38bdf8", method="caption", size=(1000, 100))
         .with_position(("center", 480))
         .with_start(0)
         .with_duration(13)
-        .crossfadein(1)
-        .crossfadeout(1)
     )
     
     texto_2 = (
@@ -40,8 +37,6 @@ def generar_video():
         .with_position(("center", 480))
         .with_start(13)
         .with_duration(13)
-        .crossfadein(1)
-        .crossfadeout(1)
     )
     
     texto_3 = (
@@ -49,8 +44,6 @@ def generar_video():
         .with_position(("center", 480))
         .with_start(26)
         .with_duration(14)
-        .crossfadein(1)
-        .crossfadeout(1)
     )
     
     # 4. Unir todos los elementos en un solo video compuesto
