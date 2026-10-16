@@ -1,9 +1,8 @@
 import os
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
-from moviepy.editor import ColorClip, TextClip, CompositeVideoClip
+from moviepy import ColorClip, TextClip, CompositeVideoClip
 
 def generar_video():
     print("Generando video de 40 segundos con animaciones...")
@@ -14,45 +13,42 @@ def generar_video():
     # 2. Título principal que dura todo el video con efecto de aparición y desvanecimiento
     titulo = (
         TextClip(
-            "Automatización con Python\n& GitHub Actions",
-            fontsize=50,
+            text="Automatización con Python\n& GitHub Actions",
+            font_size=50,
             color="white",
             font="Arial",
-            align="center"
+            text_align="center"
         )
-        .set_position(("center", 200))
-        .set_duration(40)
+        .with_position(("center", 200))
+        .with_duration(40)
         .crossfadein(2)
         .crossfadeout(2)
     )
     
     # 3. Textos dinámicos que van cambiando según el segundo (animación por intervalos)
-    # Primer texto (del segundo 0 al 13)
     texto_1 = (
-        TextClip("🚀 Creando videos automáticamente", fontsize=35, color="#38bdf8", font="Arial")
-        .set_position(("center", 480))
-        .set_start(0)
-        .set_duration(13)
+        TextClip(text="🚀 Creando videos automáticamente", font_size=35, color="#38bdf8", font="Arial")
+        .with_position(("center", 480))
+        .with_start(0)
+        .with_duration(13)
         .crossfadein(1)
         .crossfadeout(1)
     )
     
-    # Segundo texto (del segundo 13 al 26)
     texto_2 = (
-        TextClip("⚙️ Procesando con MoviePy y FFmpeg", fontsize=35, color="#4ade80", font="Arial")
-        .set_position(("center", 480))
-        .set_start(13)
-        .set_duration(13)
+        TextClip(text="⚙️ Procesando con MoviePy y FFmpeg", font_size=35, color="#4ade80", font="Arial")
+        .with_position(("center", 480))
+        .with_start(13)
+        .with_duration(13)
         .crossfadein(1)
         .crossfadeout(1)
     )
     
-    # Tercer texto (del segundo 26 al 40)
     texto_3 = (
-        TextClip("📺 Subida automática a YouTube completada", fontsize=35, color="#f472b6", font="Arial")
-        .set_position(("center", 480))
-        .set_start(26)
-        .set_duration(14)
+        TextClip(text="📺 Subida automática a YouTube completada", font_size=35, color="#f472b6", font="Arial")
+        .with_position(("center", 480))
+        .with_start(26)
+        .with_duration(14)
         .crossfadein(1)
         .crossfadeout(1)
     )
@@ -75,7 +71,6 @@ def subir_a_youtube(video_path):
     print("Iniciando subida a YouTube...")
     SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
     
-    # Credenciales obtenidas mediante variables de entorno (GitHub Secrets)
     client_id = os.environ.get("YT_CLIENT_ID")
     client_secret = os.environ.get("YT_CLIENT_SECRET")
     refresh_token = os.environ.get("YT_REFRESH_TOKEN")
@@ -96,10 +91,10 @@ def subir_a_youtube(video_path):
             "title": "Video Automático de 40 Segundos - Proyecto EEST N°1",
             "description": "Video generado y subido automáticamente usando Python, MoviePy y GitHub Actions.",
             "tags": ["python", "automation", "githubactions", "moviepy"],
-            "categoryId": "28" # Ciencia y tecnología
+            "categoryId": "28"
         },
         "status": {
-            "privacyStatus": "public" # Puede ser 'public', 'unlisted' o 'private'
+            "privacyStatus": "public"
         }
     }
     
